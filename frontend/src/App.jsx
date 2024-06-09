@@ -8,8 +8,6 @@ import taskService from './services/tasks'
 
 function App() {
 
-  // taskService.getOne(1).then(res => console.log(res))
-
   return (
     <div className='content'>
       <Routes>
