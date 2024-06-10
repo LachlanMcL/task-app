@@ -28,13 +28,13 @@ const HomePage = ({getAll}) => {
                 tasks.map(task => {
                     const priorityStyle = setPriority(task.priority)
                     return (
-                        <div key={task.id} className="task">
-                            <span>
+                        <div key={task.id} >
                             <Link to="/view-task" state={{from: task.id}}>
-                                <h2>{task.title}</h2>
-                                <b><p style={{color: priorityStyle}}>{task.priority}</p></b>
+                                <div className="task">
+                                    <h2>{task.title}</h2>
+                                    <b><p style={{color: priorityStyle}}>{task.priority}</p></b>
+                                </div>
                             </Link>
-                            </span>
                         </div>
                     )
                 })
