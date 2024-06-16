@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react';
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const HomePage = ({getAll}) => {
     const [tasks, setTasks] = useState([])
+    const [test, setTest] = useState()
 
     useEffect(() => {
         getAll().then(initalTasks => setTasks(initalTasks)) //from ../services/tasks
+        const request = axios.get('https://studies.cs.helsinki.fi/restcountries/api/all')
+        request.then(response => {
+            setTest(response.data[0].capital)
+        })
     }, [])
 
     const setPriority = (taskPriority) => {
@@ -39,6 +45,9 @@ const HomePage = ({getAll}) => {
                     )
                 })
             }
+            <div>
+                {test}
+            </div>
         </>
     )
 }
