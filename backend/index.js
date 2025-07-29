@@ -73,7 +73,6 @@ app.post('/api/tasks', (req, res) => {
 app.delete('/api/tasks/:id', (req, res) => {
     const id = Number(req.params.id)
     tasks = tasks.filter(task => task.id !== id)
-  
     res.status(204).end()
   })
 
