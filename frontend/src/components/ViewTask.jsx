@@ -1,5 +1,5 @@
 import NavBar from "./NavBar";
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { useState, useEffect } from "react";
 
@@ -8,6 +8,7 @@ const ViewTask = ({getOne, remove}) => {
     const location = useLocation()
     const { from } = location.state
     const [styleColor, setStyleColor] = useState('') //priority color
+    const navigate = useNavigate()
 
     useEffect(() => {
         getOne(from) //from == task.id // getOne() is in ../services/tasks
@@ -29,8 +30,10 @@ const ViewTask = ({getOne, remove}) => {
         })
     }, [])
 
-    const handleDelete = () => {
-        remove(task.id) // remove() is in ../services/tasks
+    const handleDelete = (e) => {
+        remove(task.id).then(() => { // remove() is in ../services/tasks
+            navigate('/')
+        })
     }
 
 
@@ -42,9 +45,7 @@ const ViewTask = ({getOne, remove}) => {
                 <h1>{task.title}</h1>
                 <h3 style={{whiteSpace: "pre-wrap"}}>{task.details}</h3>
                 <h3>Priority: <span style={{color: styleColor}}>{task.priority}</span></h3>
-                <Link reloadDocument to="/">
-                    <button onClick={handleDelete}>COMPLETE ✔</button>
-                </Link>
+                <button onClick={handleDelete}>COMPLETE ✔</button>
             </div>
         </>
     )
